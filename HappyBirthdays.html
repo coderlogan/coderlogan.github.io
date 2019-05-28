@@ -3,23 +3,22 @@
 <script>
 
 var BeatMaker = {
-	me:this,
 	init:function(){
-		Object.keys(me.playDuration).forEach(function (itemKey) {
-			document.getElementById(itemKey).addEventListener("click",me.playSound.bind(null,itemKey),false);
+		Object.keys(BeatMaker.playDuration).forEach(function (itemKey) {
+			document.getElementById(itemKey).addEventListener("click",BeatMaker.playSound.bind(null,itemKey),false);
 			console.log(itemKey); // key
-			console.log(me.playDuration[itemKey]); // value
+			console.log(BeatMaker.playDuration[itemKey]); // value
 		});
 	},
 	playSound:function (buttonId){
-		me.soundsPlaying[buttonId] = setInterval(function(){document.getElementById(buttonId+"Sound").play();},me.playDuration[buttonId]*1000);
-		document.getElementById(buttonId).removeEventListener("click",me.playSound);
-		document.getElementById(buttonId).addEventListener("click",me.stopSound.bind(null,buttonId),false);	
+		BeatMaker.soundsPlaying[buttonId] = setInterval(function(){document.getElementById(buttonId+"Sound").play();},BeatMaker.playDuration[buttonId]*1000);
+		document.getElementById(buttonId).removeEventListener("click",BeatMaker.playSound);
+		document.getElementById(buttonId).addEventListener("click",BeatMaker.stopSound.bind(null,buttonId),false);	
 	},
 	stopSound:function(buttonId){
-		me.soundsPlaying[buttonId] = null;
-		document.getElementById(buttonId).removeEventListener("click",me.stopSound);
-		document.getElementById(buttonId).addEventListener("click",me.playSound.bind(null,buttonId),false);
+		BeatMaker.soundsPlaying[buttonId] = null;
+		document.getElementById(buttonId).removeEventListener("click",BeatMaker.stopSound);
+		document.getElementById(buttonId).addEventListener("click",BeatMaker.playSound.bind(null,buttonId),false);
 	},
 	playDuration:{
 	   Jared01:3,
