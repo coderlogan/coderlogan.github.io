@@ -1,0 +1,68 @@
+<html>
+<head>
+<script>
+
+var BeatMaker = {
+	me:this,
+	init:function(){
+		Object.keys(me.playDuration).forEach(function (itemKey) {
+			document.getElementById(itemKey).addEventListener("click",me.playSound.bind(null,itemKey),false);
+			console.log(itemKey); // key
+			console.log(me.playDuration[itemKey]); // value
+		});
+	},
+	playSound:function (buttonId){
+		me.soundsPlaying[buttonId] = setInterval(function(){document.getElementById(buttonId+"Sound").play();},me.playDuration[buttonId]*1000);
+		document.getElementById(buttonId).removeEventListener("click",me.playSound);
+		document.getElementById(buttonId).addEventListener("click",me.stopSound.bind(null,buttonId),false);	
+	},
+	stopSound:function(buttonId){
+		me.soundsPlaying[buttonId] = null;
+		document.getElementById(buttonId).removeEventListener("click",me.stopSound);
+		document.getElementById(buttonId).addEventListener("click",me.playSound.bind(null,buttonId),false);
+	},
+	playDuration:{
+	   Jared01:3,
+	   Jared02:4,
+	   Jared03:6,
+	   Bryce01:2,
+	   Bryce02:12,
+	   Bryce03:24
+	},
+	soundsPlaying:[]
+}
+
+
+document.addEventListener("load", BeatMaker.init);
+
+</script>
+</head>
+<body>
+<input id="Jared01" type="button" value="Jared 'Ow, Dangit Rosalina'" />
+<input id="Jared02" type="button" value="Jared 'Awww Yeah'" />
+<input id="Jared03" type="button" value="Jared 'Go Brycie, Go!'" />
+<input id="Bryce01" type="button" value="Bryce 'Oh Dang...'" />
+<input id="Bryce02" type="button" value="Bryce 'Owwwwww'" />
+<input id="Bryce03" type="button" value="Bryce '...What I thought'" />
+
+<audio id="Jared01Sound">
+	<source src="/Sounds/Jared-OwDangitRosalina.mp3" type="audio/mpeg">
+</audio>
+<audio id="Jared02Sound">
+	<source src="/Sounds/Jared-AwwwYeah.mp3" type="audio/mpeg">
+</audio>
+<audio id="Jared03Sound">
+	<source src="/Sounds/Jared-GoBrycieGo.mp3" type="audio/mpeg">
+</audio>
+<audio id="Bryce01Sound">
+	<source src="/Sounds/Bryce-OhDang-01.mp3" type="audio/mpeg">
+</audio>
+<audio id="Bryce02Sound">
+	<source src="/Sounds/Bryce-Owwwwwww.mp3" type="audio/mpeg">
+</audio>
+<audio id="Bryce03Sound">
+	<source src="/Sounds/Bryce-WhatIThought.mp3" type="audio/mpeg">
+</audio>
+
+</body>
+</html>
